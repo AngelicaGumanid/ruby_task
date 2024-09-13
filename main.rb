@@ -45,6 +45,8 @@ def add_user(persons)
 
     puts "\nUser added successfully!"
   end
+
+  display_list(persons)
 end
 
 # DELETE USER LOGIC
@@ -60,6 +62,7 @@ def delete_user(persons)
     persons.delete_at(index)
     print "\nSuccessfully deleted."
   end
+  display_list(persons)
 end
 
 # DISPLAY LIST LOGIC
@@ -69,22 +72,22 @@ def display_list(persons)
 end
 
 # MAIN
-puts "\nTYPE 'add_user' TO ADD A USER."
-puts "TYPE 'delete_user' TO DELETE A USER."
-puts "=================================================="
+loop do
+  puts "\nTYPE 'add_user' TO ADD A USER."
+  puts "TYPE 'delete_user' TO DELETE A USER."
+  puts "=================================================="
 
-print "\nDo you want to add or delete a user? "
-choose = gets.chomp
+  print "\nDo you want to add, delete a user or exit? "
+  choose = gets.chomp
 
-if choose == "add_user"
-  add_user(persons)
-elsif choose == "delete_user"
-  delete_user(persons)
-else
-  puts "Invalid!"
-end
-
-# DISPLAY ARRAY
-persons.each do |key, value|
-  puts "Information: #{key}, #{value}\n"
+  if choose == "add_user"
+    add_user(persons)
+  elsif choose == "delete_user"
+    delete_user(persons)
+  elsif choose == "exit"
+    puts "\nExisting the program!"
+    break
+  else
+    puts "Invalid!"
+  end
 end
