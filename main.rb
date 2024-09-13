@@ -41,32 +41,39 @@ def add_user(persons)
     print "Input age: "
     add_age = gets.chomp.to_i
 
-    persons << {name: add_name, age:add_age, national_id:add_national_id}
+    persons.unshift({name: add_name, age:add_age, national_id:add_national_id})
 
-    puts "User added successfully!"
+    puts "\nUser added successfully!"
   end
 end
 
 # DELETE USER LOGIC
-
 def delete_user(persons)
-  print "Enter National ID to delete: "
+  print "\nEnter National ID to delete: "
   del_national_id = gets.chomp.to_i
 
   index = persons.find_index { |person| person[:national_id] == del_national_id}
 
   if index.nil?
-    puts "User not found."
+    puts "\nUser not found."
   else
     persons.delete_at(index)
     print "\nSuccessfully deleted."
   end
 end
 
+# DISPLAY LIST LOGIC
+def display_list(persons)
+  puts "\nUpdate list of National ID List: "
+  persons.each {|person|puts person}
+end
+
+# MAIN
 puts "\nTYPE 'add_user' TO ADD A USER."
 puts "TYPE 'delete_user' TO DELETE A USER."
 puts "=================================================="
-print "Do you want to add or delete a user? "
+
+print "\nDo you want to add or delete a user? "
 choose = gets.chomp
 
 if choose == "add_user"
