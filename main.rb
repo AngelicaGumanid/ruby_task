@@ -47,12 +47,26 @@ def add_user(persons)
   end
 end
 
-persons.each do |key, value|
-  puts "Information: #{key}, #{value}\n"
+# DELETE USER LOGIC
+
+def delete_user(persons)
+  print "Enter National ID to delete: "
+  del_national_id = gets.chomp.to_i
+
+  index = persons.find_index { |person| person[:national_id] == del_national_id}
+
+  if index.nil?
+    puts "User not found."
+  else
+    persons.delete_at(index)
+    print "\nSuccessfully deleted."
+  end
 end
 
-puts "\nType 'add_user' to add a user or delete_user to delete a user."
-print "Do you want to add or delete a user"
+puts "\nTYPE 'add_user' TO ADD A USER."
+puts "TYPE 'delete_user' TO DELETE A USER."
+puts "=================================================="
+print "Do you want to add or delete a user? "
 choose = gets.chomp
 
 if choose == "add_user"
