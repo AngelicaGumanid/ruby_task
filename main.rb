@@ -70,9 +70,14 @@ print "Do you want to add or delete a user? "
 choose = gets.chomp
 
 if choose == "add_user"
-  puts ""
+  add_user(persons)
 elsif choose == "delete_user"
-  puts ""
+  delete_user(persons)
 else
   puts "Invalid!"
+end
+
+# DISPLAY ARRAY
+persons.each do |key, value|
+  puts "Information: #{key}, #{value}\n"
 end
