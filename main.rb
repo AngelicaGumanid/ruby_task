@@ -26,3 +26,24 @@ persons =
 persons.each do |key, value|
   puts "Information: #{key}, #{value}\n"
 end
+
+print "\nInput a National ID: "
+add_national_id = gets.chomp.to_i
+
+if persons.any? { |person| person[:national_id] == add_national_id}
+  puts "\nFailed to add: National ID already exists."
+else
+  print "Input name: "
+  add_name = gets.chomp
+
+  print "Input age: "
+  add_age = gets.chomp.to_i
+
+  persons << {name: add_name, age:add_age, national_id:add_national_id}
+
+  puts "User added successfully!"
+end
+
+persons.each do |key, value|
+  puts "Information: #{key}, #{value}\n"
+end
