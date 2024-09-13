@@ -47,3 +47,15 @@ end
 persons.each do |key, value|
   puts "Information: #{key}, #{value}\n"
 end
+
+puts "\nType 'add_user' to add a user or delete_user to delete a user."
+print "Do you want to add or delete a user"
+choose = gets.chomp
+
+if choose == "add_user"
+  puts ""
+elsif choose == "delete_user"
+  puts ""
+else
+  puts "Invalid!"
+end
