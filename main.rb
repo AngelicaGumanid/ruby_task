@@ -178,8 +178,15 @@ loop do
     edit_user(persons)
 
   elsif choose == "exit"
-    puts "\nExisting the program!"
-    break
+    print "\nAre you sure you want to exit (y/n)? "
+    action = gets.chomp
+
+    if action == "y"
+      puts "\nEXISTING THE PROGRAM!"
+      break
+
+    else
+    end
 
   else
     puts "\nINVALID! PLEASE MAKE SURE YOU TYPE THE CORRECT SPELLING! TRY AGAIN!"
