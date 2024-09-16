@@ -95,6 +95,52 @@ def search_user(persons)
 
 end
 
+# ==================== EDIT USER LOGIC ====================
+def edit_user(persons)
+  print "\nEnter National ID of the user to edit: "
+  national_id = gets.chomp.to_i
+
+  user_index = persons.find_index { |person| person[:national_id] == national_id}
+
+  if user_index
+
+    user = persons[user_index]
+
+    puts "\n=================================================="
+    print "\nEDIT USER DETAILS \nNAME:#{user[:name]} \nAGE:#{user[:age]}\n"
+    puts "\n=================================================="
+
+    print "\nEnter new name (or press Enter to keep '#{user[:name]}}'): "
+    new_name = gets.chomp
+    new_name = new_name.nil? ? user[:name] : new_name
+
+    print "Enter new age (or press Enter to keep '#{user[:age]}'): "
+    new_age_input = gets.chomp.to_i
+    new_age = new_age_input.nil? ? user[:age] : new_age_input.to_i
+
+    #user[:name] = new_name unless new_name.nil?
+    #user[:age] = new_age.to_i unless new_age.nil?
+
+    user[:name] = new_name
+    user[:age] = new_age
+
+    persons.delete_at(user_index)
+    persons.unshift(user)
+
+    puts "\n=================================================="
+    puts "\nUSER UPDATED SUCCESSFULLY"
+    print "NAME:#{user[:name]}"
+    print "AGE:#{user[:age]}"
+    puts "\n=================================================="
+
+  else
+    puts "\nUser not found!."
+  end
+
+  display_list(persons)
+
+end
+
 # DISPLAY LIST LOGIC UPDATED AND RECENT 5
 def display_list(persons)
   puts "\nLIST OF NATIONAL IDs:"
@@ -112,6 +158,7 @@ loop do
   puts "TYPE 'add_user' TO ADD A USER."
   puts "TYPE 'delete_user' TO DELETE A USER."
   puts "TYPE 'search_user' TO SEARCH FOR USER."
+  puts "TYPE 'edit_user' TO EDIT THE USER DETAIL."
   puts "TYPE 'exit' TO EXIT THE PROGRAM."
   puts "=================================================="
 
@@ -126,6 +173,9 @@ loop do
 
   elsif choose == "search_user"
     search_user(persons)
+
+  elsif choose == "edit_user"
+    edit_user(persons)
 
   elsif choose == "exit"
     puts "\nExisting the program!"
