@@ -71,19 +71,30 @@ def display_list(persons)
   persons.each {|person|puts person}
 end
 
+# DISPLAY LAST 20 USER
+def display_last20(persons)
+  puts "\nTHE LAST 20 PERSONS: "
+  persons.last(20).each { |person| puts person}
+end
+
 # MAIN
 loop do
-  puts "\nTYPE 'add_user' TO ADD A USER."
+  puts "\n=================================================="
+  puts "TYPE 'add_user' TO ADD A USER."
   puts "TYPE 'delete_user' TO DELETE A USER."
+  puts "TYPE 'display_last' TO DISPLAY LAST 20 PERSONS IN THE LIST."
+  puts "TYPE 'exit' TO EXIT THE PROGRAM."
   puts "=================================================="
 
-  print "\nDo you want to add, delete a user or exit? "
+  print "What would you like to do, choose above? "
   choose = gets.chomp
 
   if choose == "add_user"
     add_user(persons)
   elsif choose == "delete_user"
     delete_user(persons)
+  elsif choose == "display_last"
+    display_last20(persons)
   elsif choose == "exit"
     puts "\nExisting the program!"
     break
