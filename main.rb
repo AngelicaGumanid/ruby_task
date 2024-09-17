@@ -104,11 +104,11 @@ def edit_user(persons)
 
     print "\nEnter new name (or press Enter to keep '#{user[:name]}}'): "
     new_name = gets.chomp
-    new_name = new_name.nil? ? user[:name] : new_name
+    new_name = new_name ? user[:name] : new_name
 
     print "Enter new age (or press Enter to keep '#{user[:age]}'): "
     input_age = gets.chomp.to_i
-    new_age = input_age.nil? ? user[:age] : input_age.to_i
+    new_age = input_age ? user[:age] : input_age.to_i
 
     user[:name] = new_name
     user[:age] = new_age
@@ -117,7 +117,7 @@ def edit_user(persons)
 
     puts "\n=================================================="
     puts "\nUSER UPDATED SUCCESSFULLY"
-    print "NAME:#{user[:name]}"
+    print "NAME:#{user[:name]}\n"
     print "AGE:#{user[:age]}"
     puts "\n=================================================="
 
