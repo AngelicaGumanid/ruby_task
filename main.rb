@@ -26,16 +26,11 @@ persons =
 # ==================== ADD USER LOGIC ====================
 def add_user(persons)
 
-  system("clear")
-
   print "\nInput a National ID: "
   national_id = gets.chomp.to_i
 
-  if persons.any? do |person|
-    person[:national_id] == national_id
-  end
+  if persons.any? do |person| person[:national_id] == national_id end
     puts "\nFailed to add: National ID already exists."
-
   else
     print "Input name: "
     name = gets.chomp
@@ -46,11 +41,10 @@ def add_user(persons)
     persons.unshift({ name: name, age: age, national_id: national_id })
 
     puts "\nUser added successfully!"
-
   end
 
   display_list(persons)
-
+  system("clear")
 end
 
 # ==================== DELETE USER LOGIC ====================
@@ -59,20 +53,17 @@ def delete_user(persons)
   print "\nEnter National ID to delete: "
   national_id = gets.chomp.to_i
 
-  index = persons.find_index { |person|
-    person[:national_id] == national_id }
+  index = persons.find_index { |person| person[:national_id] == national_id }
 
-  if index.nil?
+  if index
     puts "\nUser not found."
-
   else
     persons.delete_at(index)
     print "\nSuccessfully deleted."
-
   end
 
   display_list(persons)
-
+  system("clear")
 end
 
 # ==================== SEARCH LOGIC ====================
@@ -81,37 +72,43 @@ def search_user(persons)
   print "\nEnter National ID or Name to search: "
   search = gets.chomp
 
-  if search.to_i.to_s == search
-    find = search.to_i
-    person = persons.find { |person|
-      person[:national_id] == find }
-
+  person = if search =~ /^\d+$/
+    persons.find { |person| person[:national_id] == search.to_i }
   else
-    person = persons.find { |person|
-      person[:name].downcase == search.downcase }
-
+    persons.find { |person| person[:name].casecmp ==(search).zero? }
   end
+
+  #if person
+
+  #if search.to_i.to_s == search
+   # find = search.to_i
+    #person = persons.find { |person|
+     # person[:national_id] == find }
+
+ # else
+ #   person = persons.find { |person|
+  #    person[:name].downcase == search.downcase }
+
+ # end
 
   if person
     puts "\nUser found = Name: #{person[:name]}, Age: #{person[:age]}, National ID: #{person[:national_id]}"
-
   else
     puts "\nUser not found!"
-
   end
 
+  system("clear")
 end
 
 # ==================== EDIT USER LOGIC ====================
 def edit_user(persons)
+
   print "\nEnter National ID of the user to edit: "
   national_id = gets.chomp.to_i
 
-  user_index = persons.find_index { |person|
-    person[:national_id] == national_id}
+  user_index = persons.find_index { |person| person[:national_id] == national_id}
 
   if user_index
-
     user = persons[user_index]
 
     puts "\n=================================================="
@@ -126,12 +123,8 @@ def edit_user(persons)
     new_age_input = gets.chomp.to_i
     new_age = new_age_input.nil? ? user[:age] : new_age_input.to_i
 
-    #user[:name] = new_name unless new_name.nil?
-    #user[:age] = new_age.to_i unless new_age.nil?
-
     user[:name] = new_name
     user[:age] = new_age
-
     persons.delete_at(user_index)
     persons.unshift(user)
 
@@ -146,6 +139,7 @@ def edit_user(persons)
   end
 
   display_list(persons)
+  system("clear")
 
 end
 
@@ -177,16 +171,12 @@ loop do
 
   if choose == "add_user"
     add_user(persons)
-
   elsif choose == "delete_user"
     delete_user(persons)
-
   elsif choose == "search_user"
     search_user(persons)
-
   elsif choose == "edit_user"
     edit_user(persons)
-
   elsif choose == "exit"
     print "\nAre you sure you want to exit (y/n)? "
     action = gets.chomp
@@ -194,13 +184,8 @@ loop do
     if action == "y"
       puts "\nEXISTING THE PROGRAM!"
       break
-
-    else
     end
-
   else
     puts "\nINVALID! PLEASE MAKE SURE YOU TYPE THE CORRECT SPELLING! TRY AGAIN!"
-
   end
-
 end
