@@ -26,10 +26,14 @@ persons =
 # ==================== ADD USER LOGIC ====================
 def add_user(persons)
 
+  system("clear")
+
   print "\nInput a National ID: "
   national_id = gets.chomp.to_i
 
-  if persons.any? { |person| person[:national_id] == national_id }
+  if persons.any? do |person|
+    person[:national_id] == national_id
+  end
     puts "\nFailed to add: National ID already exists."
 
   else
@@ -55,7 +59,8 @@ def delete_user(persons)
   print "\nEnter National ID to delete: "
   national_id = gets.chomp.to_i
 
-  index = persons.find_index { |person| person[:national_id] == national_id }
+  index = persons.find_index { |person|
+    person[:national_id] == national_id }
 
   if index.nil?
     puts "\nUser not found."
@@ -78,10 +83,12 @@ def search_user(persons)
 
   if search.to_i.to_s == search
     find = search.to_i
-    person = persons.find { |person| person[:national_id] == find }
+    person = persons.find { |person|
+      person[:national_id] == find }
 
   else
-    person = persons.find { |person| person[:name].downcase == search.downcase }
+    person = persons.find { |person|
+      person[:name].downcase == search.downcase }
 
   end
 
@@ -100,7 +107,8 @@ def edit_user(persons)
   print "\nEnter National ID of the user to edit: "
   national_id = gets.chomp.to_i
 
-  user_index = persons.find_index { |person| person[:national_id] == national_id}
+  user_index = persons.find_index { |person|
+    person[:national_id] == national_id}
 
   if user_index
 
@@ -153,6 +161,8 @@ end
 
 # ==================== MAIN ====================
 loop do
+
+  system("clear")
 
   puts "\n=================================================="
   puts "TYPE 'add_user' TO ADD A USER."
