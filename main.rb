@@ -78,19 +78,6 @@ def search_user(persons)
     persons.find { |person| person[:name].casecmp ==(search).zero? }
   end
 
-  #if person
-
-  #if search.to_i.to_s == search
-   # find = search.to_i
-    #person = persons.find { |person|
-     # person[:national_id] == find }
-
- # else
- #   person = persons.find { |person|
-  #    person[:name].downcase == search.downcase }
-
- # end
-
   if person
     puts "\nUser found = Name: #{person[:name]}, Age: #{person[:age]}, National ID: #{person[:national_id]}"
   else
@@ -120,8 +107,8 @@ def edit_user(persons)
     new_name = new_name.nil? ? user[:name] : new_name
 
     print "Enter new age (or press Enter to keep '#{user[:age]}'): "
-    new_age_input = gets.chomp.to_i
-    new_age = new_age_input.nil? ? user[:age] : new_age_input.to_i
+    input_age = gets.chomp.to_i
+    new_age = input_age.nil? ? user[:age] : input_age.to_i
 
     user[:name] = new_name
     user[:age] = new_age
