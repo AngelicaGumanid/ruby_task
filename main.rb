@@ -142,43 +142,41 @@ def search_user
 end
 
 # ==================== EDIT USER LOGIC ====================
-def edit_user(persons)
+def edit_user
   print "\nEnter National ID of the user to edit: "
   national_id = gets.chomp.to_i
-  user_index = persons.find_index { |person| person[:national_id] == national_id}
-  if user_index
-    user = persons[user_index]
+  person = Person.find_by_national_id(national_id)
+
+  if person
     puts "\n=================================================="
-    print "\nEDIT USER DETAILS \nNAME:#{user[:name]} \nAGE:#{user[:age]}\n"
+    print "\nEDIT USER DETAILS \nNAME:#{user.name} \nAGE:#{user.age}\n"
     puts "\n=================================================="
 
-    print "\nEnter new name (or press Enter to keep '#{user[:name]}}'): "
+    print "\nEnter new name (or press Enter to keep '#{user.name}'): "
     new_name = gets.chomp
-    new_name = new_name.nil? ? user[:name] : new_name
-    new_name = new_name ? user[:name] : new_name
+    new_name = new_name.empty? ? person.name : new_name
 
     print "Enter new age (or press Enter to keep '#{user[:age]}'): "
     input_age = gets.chomp.to_i
-    new_age = input_age.nil? ? user[:age] : input_age.to_i
-    new_age = input_age ? user[:age] : input_age.to_i
+    new_age = input_age.empty? ? person.age : input_age.to_i
 
-    user[:name] = new_name
-    user[:age] = new_age
-@@ -117,7 +117,7 @@ def edit_user(persons)
+    person.update(name: new_name, age: new_age)
 
     puts "\n=================================================="
     puts "\nUSER UPDATED SUCCESSFULLY"
-    print "NAME:#{user[:name]}"
-    print "NAME:#{user[:name]}\n"
-    print "AGE:#{user[:age]}"
+    #print "NAME:#{person.name}"
+    #print "NAME:#{person.name}\n"
+    #print "AGE:#{person.age}"
+    person.display
     puts "\n=================================================="
-
   else
     puts "\nUser not found!."
   end
-  display_list(persons)
+
+  display_list
   system("clear")
 end
+
 # DISPLAY LIST LOGIC UPDATED AND RECENT 5
 def display_list(persons)
   puts "\nLIST OF NATIONAL IDs:"
