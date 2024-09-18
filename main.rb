@@ -11,6 +11,10 @@ class person
   def save
     @@records << self
   end
+
+  def self.all
+    @@records
+  end
 end
 
 # ==================== ARRAY ====================
