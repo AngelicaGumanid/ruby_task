@@ -1,4 +1,4 @@
-class person
+class Person
   attr_accessor :name, :age, :national_id
   @@records = []
 
@@ -77,7 +77,7 @@ persons =
 
 # ==================== POPULATING @@records ====================
   persons.each do |person|
-    person = Person,new(person[:name], person[:age], person[:national_id])
+    person = Person.new(person[:name], person[:age], person[:national_id])
     person.save
   end
 
@@ -149,15 +149,15 @@ def edit_user
 
   if person
     puts "\n=================================================="
-    print "\nEDIT USER DETAILS \nNAME:#{user.name} \nAGE:#{user.age}\n"
+    print "\nEDIT USER DETAILS \nNAME:#{person.name} \nAGE:#{person.age}\n"
     puts "\n=================================================="
 
-    print "\nEnter new name (or press Enter to keep '#{user.name}'): "
+    print "\nEnter new name (or press Enter to keep '#{person.name}'): "
     new_name = gets.chomp
     new_name = new_name.empty? ? person.name : new_name
 
-    print "Enter new age (or press Enter to keep '#{user[:age]}'): "
-    input_age = gets.chomp.to_i
+    print "Enter new age (or press Enter to keep '#{person.age}'): "
+    input_age = gets.chomp
     new_age = input_age.empty? ? person.age : input_age.to_i
 
     person.update(name: new_name, age: new_age)
@@ -214,8 +214,13 @@ loop do
       puts "\nEXISTING THE PROGRAM!"
       break
     end
-    
+
   else
     puts "\nINVALID! PLEASE MAKE SURE YOU TYPE THE CORRECT SPELLING! TRY AGAIN!"
   end
 end
+
+#Error 1, list not showing the newly updated data (Add and Edit)
+#Error 2, Full name error, searching for one name in a full name is not showing.
+#(ADD) Showing the information of the deleted information.
+#Review code, format and try to simplify it, if it can syempre.
