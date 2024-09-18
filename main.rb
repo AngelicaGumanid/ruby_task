@@ -75,6 +75,7 @@ persons =
     { name: "Ziana", age: 25, national_id: 457808 }
   ]
 
+# ==================== POPULATING @@records ====================
   persons.each do |person|
     person = Person,new(person[:name], person[:age], person[:national_id])
     person.save
@@ -84,19 +85,24 @@ persons =
 def add_user
   print "\nInput a National ID: "
   national_id = gets.chomp.to_i
-  if persons.any? do |person| person[:national_id] == national_id end
+
+  if Person.find_by_national_id(national_id)
     puts "\nFailed to add: National ID already exists."
   else
     print "Input name: "
     name = gets.chomp
     print "Input age: "
     age = gets.chomp.to_i
-    persons.unshift({ name: name, age: age, national_id: national_id })
+    #persons.unshift({ name: name, age: age, national_id: national_id })
+    person = Person.new(name, age, national_id)
+    person.save
     puts "\nUser added successfully!"
   end
+
   display_list(persons)
   system("clear")
 end
+
 # ==================== DELETE USER LOGIC ====================
 def delete_user(persons)
   print "\nEnter National ID to delete: "
