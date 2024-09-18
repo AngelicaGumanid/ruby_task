@@ -99,24 +99,28 @@ def add_user
     puts "\nUser added successfully!"
   end
 
-  display_list(persons)
+  display_list
   system("clear")
 end
 
 # ==================== DELETE USER LOGIC ====================
-def delete_user(persons)
+def delete_user
+
   print "\nEnter National ID to delete: "
   national_id = gets.chomp.to_i
-  index = persons.find_index { |person| person[:national_id] == national_id }
-  if index
-    puts "\nUser not found."
-  else
-    persons.delete_at(index)
+  person = Person.find_by_national_id(national_id)
+
+  if person
+    person.destroy
     print "\nSuccessfully deleted."
+  else
+    puts "\nUser not found."
   end
-  display_list(persons)
+
+  display_list
   system("clear")
 end
+
 # ==================== SEARCH LOGIC ====================
 def search_user(persons)
   print "\nEnter National ID or Name to search: "
