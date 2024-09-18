@@ -15,6 +15,18 @@ class person
   def self.all
     @@records
   end
+
+  def self.first
+    @@records.first
+  end
+
+  def self.last
+    @@records.last
+  end
+
+  def display
+    print "Name: #{name}, Age: #{age}, National ID: #{national_id}"
+  end
 end
 
 # ==================== ARRAY ====================
