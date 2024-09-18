@@ -74,8 +74,14 @@ persons =
     { name: "Marie", age: 25, national_id: 54870 },
     { name: "Ziana", age: 25, national_id: 457808 }
   ]
+
+  persons.each do |person|
+    person = Person,new(person[:name], person[:age], person[:national_id])
+    person.save
+  end
+
 # ==================== ADD USER LOGIC ====================
-def add_user(persons)
+def add_user
   print "\nInput a National ID: "
   national_id = gets.chomp.to_i
   if persons.any? do |person| person[:national_id] == national_id end
