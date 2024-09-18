@@ -178,12 +178,13 @@ def edit_user
 end
 
 # DISPLAY LIST LOGIC UPDATED AND RECENT 5
-def display_list(persons)
+def display_list
   puts "\nLIST OF NATIONAL IDs:"
-  persons.first(5).each do |person|
-    puts "National ID: #{person[:national_id]}, Name: #{person[:name]}, Age: #{person[:age]}"
+  Person.all.first(5).each do |person|
+    puts "National ID: #{person.national_id}, Name: #{person.name}, Age: #{person.age}"
   end
 end
+
 # ==================== MAIN ====================
 loop do
   system("clear")
@@ -196,21 +197,24 @@ loop do
   puts "=================================================="
   print "What would you like to do, choose above? "
   choose = gets.chomp
+
   if choose == "add_user"
-    add_user(persons)
+    add_user
   elsif choose == "delete_user"
-    delete_user(persons)
+    delete_user
   elsif choose == "search_user"
-    search_user(persons)
+    search_user
   elsif choose == "edit_user"
-    edit_user(persons)
+    edit_user
   elsif choose == "exit"
     print "\nAre you sure you want to exit (y/n)? "
     action = gets.chomp
+
     if action == "y"
       puts "\nEXISTING THE PROGRAM!"
       break
     end
+    
   else
     puts "\nINVALID! PLEASE MAKE SURE YOU TYPE THE CORRECT SPELLING! TRY AGAIN!"
   end
