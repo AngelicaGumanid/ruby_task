@@ -27,6 +27,27 @@ class person
   def display
     print "Name: #{name}, Age: #{age}, National ID: #{national_id}"
   end
+
+  def self.find_by_national_id(national_id)
+    @@records.find { |person| person.national_id == national_id }
+  end
+
+  def update(name: nil, age: nil)
+    @name = name if name
+    @age = age if age
+  end
+
+  def destroy
+    @@records.delete(self)
+  end
+
+  def self.destroy_all
+    @@records.clear
+  end
+
+  def self.count
+    @@records.size
+  end
 end
 
 # ==================== ARRAY ====================
