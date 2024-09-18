@@ -1,3 +1,14 @@
+class person
+  attr_accessor :name, :age, :national_id
+  @@records = []
+
+  def initialize(name, age, national_id)
+    @name = name
+    @age = age
+    @national_id = national_id
+  end
+end
+
 # ==================== ARRAY ====================
 persons =
   [
