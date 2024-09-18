@@ -7,6 +7,10 @@ class person
     @age = age
     @national_id = national_id
   end
+
+  def save
+    @@records << self
+  end
 end
 
 # ==================== ARRAY ====================
