@@ -122,21 +122,25 @@ def delete_user
 end
 
 # ==================== SEARCH LOGIC ====================
-def search_user(persons)
+def search_user
   print "\nEnter National ID or Name to search: "
   search = gets.chomp
+
   person = if search =~ /^\d+$/
-    persons.find { |person| person[:national_id] == search.to_i }
+    Person.find_by_national_id(search.to_i)
   else
-    persons.find { |person| person[:name].casecmp ==(search).zero? }
+    Person.all.find { |person| person.name.casecmp(search).zero? }
   end
+
   if person
-    puts "\nUser found = Name: #{person[:name]}, Age: #{person[:age]}, National ID: #{person[:national_id]}"
+    puts "\nUser found = Name: #{person.name}, Age: #{person.age}, National ID: #{person.national_id}"
   else
     puts "\nUser not found!"
   end
+
   system("clear")
 end
+
 # ==================== EDIT USER LOGIC ====================
 def edit_user(persons)
   print "\nEnter National ID of the user to edit: "
